@@ -1,0 +1,112 @@
+C51 COMPILER V9.60.7.0   DEFUSE                                                            10/19/2024 23:26:32 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DEFUSE
+OBJECT MODULE PLACED IN .\Objects\defuse.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE defuse.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\de
+                    -fuse.lst) TABS(2) OBJECT(.\Objects\defuse.obj)
+
+line level    source
+
+   1          #include "LCD1602.h"
+   2          #include "Delay.h"
+   3          #include <STC89C5xRC.H>
+   4          sbit beep=P2^5;
+   5          
+   6          unsigned int defuse(unsigned int p)
+   7          {
+   8   1                int r=0;
+   9   1                if(p<=36000)//由于拆弹需要4s,当计数器p小于36000才允许拆弹
+  10   1                    {
+  11   2                      LCD_Init();//清屏
+  12   2                      LCD_ShowString(1,1,"Defusing Bomb..");
+  13   2                      for(r=0;r<=16;r++)//每250ms更新显示拆弹进度，共16轮，共4s
+  14   2                      {
+  15   3                        Delay(250);
+  16   3                        if(P30==0)//拆弹途中按下K1表示取消拆弹
+  17   3                        {
+  18   4                          Delay(20);
+  19   4                          while(P30==0);
+  20   4                          Delay(20);
+  21   4                          LCD_Init();LCD_ShowString(1,1,"Defuse canceled");
+  22   4                          Delay(1000);
+  23   4                          LCD_Init();
+  24   4                          LCD_ShowString(1,1,"Bomb explodes");
+  25   4                          LCD_ShowString(2,1,"after");          
+  26   4                          LCD_ShowString(2,15,"s");
+  27   4                          break;
+  28   4                        }
+  29   3                        switch(r)
+  30   3                        {
+  31   4                          case 0:
+  32   4                          case 1:
+  33   4                          LCD_ShowString(2,1,"*");break;  
+  34   4                          case 2:
+  35   4                          LCD_ShowString(2,1,"**");break;
+  36   4                          case 3:
+  37   4                          LCD_ShowString(2,1,"***");break;  
+  38   4                          case 4:
+  39   4                          LCD_ShowString(2,1,"****");break; 
+  40   4                          case 5:
+  41   4                          LCD_ShowString(2,1,"*****");break;  
+  42   4                          case 6:
+  43   4                          LCD_ShowString(2,1,"******");break; 
+  44   4                          case 7:
+  45   4                          LCD_ShowString(2,1,"*******");break;  
+  46   4                          case 8:
+  47   4                          LCD_ShowString(2,1,"********");break; 
+  48   4                          case 9:
+  49   4                          LCD_ShowString(2,1,"*********");break;  
+  50   4                          case 10:
+  51   4                          LCD_ShowString(2,1,"**********");break; 
+  52   4                          case 11:
+  53   4                          LCD_ShowString(2,1,"***********");break;  
+  54   4                          case 12:
+C51 COMPILER V9.60.7.0   DEFUSE                                                            10/19/2024 23:26:32 PAGE 2   
+
+  55   4                          LCD_ShowString(2,1,"************");break; 
+  56   4                          case 13:
+  57   4                          LCD_ShowString(2,1,"*************");break;  
+  58   4                          case 14:
+  59   4                          LCD_ShowString(2,1,"**************");break; 
+  60   4                          case 15:
+  61   4                          LCD_ShowString(2,1,"***************");break;  
+  62   4                          case 16:
+  63   4                          LCD_ShowString(2,1,"****************");break;
+  64   4                        }
+  65   3                      }
+  66   2                    } 
+  67   1                    else//计数器p大于36000，即剩余时间不足4s,不允许拆弹，并给予反馈提示
+  68   1                    {
+  69   2                      LCD_Init();//清屏
+  70   2                      LCD_ShowString(1,1,"You don't have");
+  71   2                      LCD_ShowString(2,1,"enough time!!!");
+  72   2                      Delay(1000);
+  73   2                      LCD_Init();//清屏
+  74   2                      LCD_ShowString(1,1,"GoodBye");
+  75   2                      LCD_ShowString(2,1,"my friend");
+  76   2                      Delay(1000);
+  77   2                    }
+  78   1                    if(r==16)
+  79   1                    {
+  80   2                      return 0;
+  81   2                    }
+  82   1                    else
+  83   1                    {
+  84   2                      return r*250;//16*250
+  85   2                    }
+  86   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    465    ----
+   CONSTANT SIZE    =    254    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

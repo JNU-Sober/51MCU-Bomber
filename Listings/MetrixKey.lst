@@ -1,0 +1,57 @@
+C51 COMPILER V9.60.7.0   METRIXKEY                                                         10/19/2024 17:15:25 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE METRIXKEY
+OBJECT MODULE PLACED IN .\Objects\MetrixKey.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE MetrixKey.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\MetrixKey.lst) TABS(2) OBJECT(.\Objects\MetrixKey.obj)
+
+line level    source
+
+   1          #include <STC89C5xRC.H>
+   2          #include "Delay.h"
+   3          #include "LCD1602.h"
+   4          
+   5          unsigned int MetrixKey()
+   6          {
+   7   1        unsigned int k=10;
+   8   1        P1=0xFF;
+   9   1        P13=0;
+  10   1        if (P15==0){Delay(20);while(P15==0);Delay(20);k=9;}
+  11   1        if (P16==0){Delay(20);while(P16==0);Delay(20);k=5;}
+  12   1        if (P17==0){Delay(20);while(P17==0);Delay(20);k=1;}
+  13   1        
+  14   1        P1=0xFF;
+  15   1        P12=0;
+  16   1        if (P15==0){Delay(20);while(P15==0);Delay(20);k=0;}
+  17   1        if (P16==0){Delay(20);while(P16==0);Delay(20);k=6;}
+  18   1        if (P17==0){Delay(20);while(P17==0);Delay(20);k=2;}
+  19   1        
+  20   1        P1=0xFF;
+  21   1        P11=0;
+  22   1        if (P15==0){Delay(20);while(P15==0);Delay(20);k=11;}
+  23   1        if (P16==0){Delay(20);while(P16==0);Delay(20);k=7;}
+  24   1        if (P17==0){Delay(20);while(P17==0);Delay(20);k=3;}
+  25   1        
+  26   1        P1=0xFF;
+  27   1        P10=0;
+  28   1        if (P15==0){Delay(20);while(P15==0);Delay(20);k=12;}
+  29   1        if (P16==0){Delay(20);while(P16==0);Delay(20);k=8;}
+  30   1        if (P17==0){Delay(20);while(P17==0);Delay(20);k=4;}
+  31   1        
+  32   1        return k;
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    342    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

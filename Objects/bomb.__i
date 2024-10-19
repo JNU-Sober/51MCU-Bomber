@@ -1,0 +1,1 @@
+"bomb.c" OPTIMIZE (8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\bomb.lst) TABS (2) OBJECT(.\Objects\bomb.obj)

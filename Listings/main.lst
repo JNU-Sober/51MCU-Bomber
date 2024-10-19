@@ -1,0 +1,95 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              10/19/2024 23:28:12 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <STC89C5xRC.H>
+   2          #include "MetrixKey.h"
+   3          #include "LCD1602.h"
+   4          #include "Delay.h"
+   5          #include "bomb.h"
+   6          sbit beep=P2^5;
+   7          
+   8          void main()
+   9          {
+  10   1        unsigned int k=0; //k是按键接收器
+  11   1        unsigned int i=0; //i是密码位数记录器
+  12   1        unsigned int p=0; //倒计时模块记录时间
+  13   1        unsigned int r=0;
+  14   1        unsigned int j=0; //j是密码比对器
+  15   1        unsigned int password[7]={0,0,0,0,0,0,0};
+  16   1        unsigned int correct[7]={7,3,5,5,6,0,8};//正确的密码
+  17   1        LCD_Init();//初始化LCD
+  18   1        while(1)
+  19   1        {
+  20   2          LCD_ShowString(1,1,"Enter password:");
+  21   2          k=MetrixKey();
+  22   2          if(i<=6 && k!=10 && k<=10)//i大于6时不允许再接受数据，没有按下键时不接受数据，只接受0-9的输入
+  23   2          {
+  24   3              password[i]=k;
+  25   3              if(password[i]!=10)//10不是指输入的数据是10，而是表示空，详见“MetrixKey.c”
+  26   3              {
+  27   4                  LCD_ShowNum(2,i+1,password[i],1);//以数组存放输入的密码
+  28   4                  i++;//每输入一位密码下标加1
+  29   4                  for(j=0;j<=50;j++)//蜂鸣器每隔1ms震动一次，持续50ms
+  30   4                    {
+  31   5                      beep=!beep;
+  32   5                      Delay(1);
+  33   5                    }
+  34   4              }
+  35   3          }
+  36   2      //如果按下12，密码清零
+  37   2          if(k==12)
+  38   2          {
+  39   3            for(r=0;r<=6;r++)
+  40   3            {password[r]=0;}//将各位密码清0
+  41   3            i=0;LCD_Init();//记录器i清0，显示屏清零
+  42   3          }
+  43   2      //如果按下11，确认密码
+  44   2            if(k==11)
+  45   2            {
+  46   3              j=0;i=0;p=0;//重置密码比对器、密码位数记录器、时间记录器
+  47   3              for(r=0;r<7;r++)//判断输入的密码是否和设定密码相同
+  48   3              {
+  49   4                if(password[r]==correct[r])
+  50   4                  j++;
+  51   4              }
+  52   3              LCD_Init();//清屏
+  53   3              if(j==7)//j=7表示密码正确
+  54   3              {
+C51 COMPILER V9.60.7.0   MAIN                                                              10/19/2024 23:28:12 PAGE 2   
+
+  55   4                LCD_ShowString(1,1,"Bomb has");
+  56   4                LCD_ShowString(2,1,"been planted");
+  57   4                Delay(2000);//2s后显示下一个提示
+  58   4                bomb(0);
+  59   4              }
+  60   3              else //密码错误
+  61   3              {
+  62   4                LCD_ShowString(1,1,"*Error!*");
+  63   4                Delay(2000);
+  64   4                i=0;//重置密码位数记录器
+  65   4                LCD_Init();//清屏
+  66   4              } 
+  67   3            }
+  68   2        }
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    397    ----
+   CONSTANT SIZE    =     75    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      38
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

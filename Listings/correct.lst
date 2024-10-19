@@ -1,0 +1,49 @@
+C51 COMPILER V9.60.7.0   CORRECT                                                           10/06/2024 15:47:43 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE CORRECT
+OBJECT MODULE PLACED IN .\Objects\correct.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE correct.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\c
+                    -orrect.lst) TABS(2) OBJECT(.\Objects\correct.obj)
+
+line level    source
+
+   1          unsigned int correct(unsigned int p)
+   2          {
+   3   1          unsigned int q=0;
+   4   1          if(11000<=p<=21000)
+   5   1          {
+   6   2            if(11000<=p<=11375) q=11000;
+   7   2            if(11376<=p<=12125) q=11750;
+   8   2            if(12126<=p<=12875) q=12500;
+   9   2            if(12876<=p<=13625) q=13250;
+  10   2            if(13626<=p<=14375) q=14000;
+  11   2            if(14376<=p<=15125) q=14750;
+  12   2            if(15126<=p<=15875) q=15500;
+  13   2            if(15876<=p<=16625) q=16250;
+  14   2            if(16626<=p<=17375) q=17000;
+  15   2            if(17376<=p<=18125) q=17750;
+  16   2            if(18126<=p<=18875) q=18500;
+  17   2            if(18876<=p<=20000) q=19250;
+  18   2          }
+  19   1          else if(0<=p<=40000)
+  20   1          {
+  21   2            p=p/1000;
+  22   2            q=p*1000;
+  23   2          }
+  24   1          return q;
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    537    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
